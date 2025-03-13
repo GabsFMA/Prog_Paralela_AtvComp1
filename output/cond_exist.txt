@@ -1,0 +1,2 @@
+Arquivo existente apenas para que a pasta "output" não fique
+vazia quando o arquivo de saida por ignorado pelo gitignore
