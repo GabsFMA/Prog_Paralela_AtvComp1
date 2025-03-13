@@ -13,7 +13,6 @@ def teste_solo_thread():
                     primo = False
                     break
             if primo:
-
                 lista_primos.append(numero)
 
     print(f'Lista de primos: {lista_primos}')
