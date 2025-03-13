@@ -1,16 +1,3 @@
-# import threading
-
-# def teste_thread():
-#     with open ('Entrada01.txt', 'r') as arquivo: 
-#         for linha in arquivo:
-#             print(linha.strip())
-# thread = threading.Thread(target=teste_thread)
-# thread.start()
-# thread.join()
-# print('Arquivo lido com sucesso')
-
-#----------------------------------------------------------
-
 import threading
 import time
 
@@ -29,7 +16,13 @@ def teste_solo_thread():
             if primo:
                 #print(f'{numero}: É primo')
                 lista_primos.append(numero)
+
     print(f'Lista de primos: {lista_primos}')
+    
+    with open ('Saida01.txt', 'w') as saida:
+        for numero in lista_primos:
+            str_num = str(numero)
+            saida.write(f"{str_num}\n")
                 
 
 thread = threading.Thread(target=teste_solo_thread)
@@ -39,20 +32,3 @@ thread.join()
 tempo_final = time.time()
 duracao = tempo_final - tempo_inicial
 print(f'Arquivo lido com sucesso, sua duração em segundos foi de:{round(duracao,2)}')
-
-
-#----------------------------------------------------------
-
-# def determina_primo():
-#     numero = int(input('Digite um número: '))
-#     if numero < 2:
-#         print('Número não é primo')
-#         return
-#     for i in range(2, numero):
-#         if numero % i == 0:
-#             print('Número não é primo')
-#             return
-#     print('Número é primo')
-
-
-# determina_primo()
