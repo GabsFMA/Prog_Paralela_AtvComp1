@@ -19,7 +19,7 @@ def teste_solo_thread():
 
     print(f'Lista de primos: {lista_primos}')
     
-    with open ('Saida01.txt', 'w') as saida:
+    with open ('output/Saida01.txt', 'w') as saida:
         for numero in lista_primos:
             str_num = str(numero)
             saida.write(f"{str_num}\n")
