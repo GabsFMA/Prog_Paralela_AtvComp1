@@ -175,6 +175,133 @@ def multi_thread_5_v2():
 
 #multi_thread_5_v2()
 
+#----------------------------------------------------------
 
+#Fazendo uso de dez threads (Sem organização por índice)
+
+def listar_primos_10_v1(numeros, resultado, lock):
+    lista_primos = []
+
+    for numero in numeros:
+        if numero < 2:
+            continue
+
+        primo = True  
+
+        for i in range(2, int(numero ** 0.5) + 1):
+            if numero % i == 0:
+                primo = False
+                break
+
+        if primo:
+            lista_primos.append(numero)
+
+   
+    with lock:
+        resultado.extend(lista_primos)
+
+def multi_thread_10_v1():
+    qnt_threads = 8
+    tempo_inicial = time.time()
+
+    with open('Entrada01.txt', 'r') as arquivo:
+        numeros = [int(linha.strip()) for linha in arquivo]
+
+    qnt_por_thread = len(numeros) // qnt_threads
+
+    partes = [numeros[i * qnt_por_thread: (i + 1) * qnt_por_thread] for i in range(qnt_threads)]
+
+    partes[-1].extend(numeros[qnt_threads * qnt_por_thread:])  
+
+    lista_primos_compartilhada = []
+    lock = threading.Lock()  
+    lista_threads = []
+
+    for i in range(qnt_threads):
+        thread = threading.Thread(target=listar_primos_10_v1, args=(partes[i], lista_primos_compartilhada, lock))
+        lista_threads.append(thread)
+        thread.start()
+
+    for thread in lista_threads:
+        thread.join()
+
+    with open('output/Saida_10_v1.txt', 'w') as saida:
+        for primo in sorted(lista_primos_compartilhada):
+            saida.write(f"{primo}\n")
+
+    tempo_final = time.time()
+    duracao = tempo_final - tempo_inicial
+    print(f'Processo concluído com sucessso, usando 10 Threads sua duração em segundos foi de:{round(duracao,2)}')
+
+#multi_thread_10_v1()
+
+
+#----------------------------------------------------------
+
+#Fazendo uso de cinco threads (Com organização por índice)
+
+def listar_primos_10_v2(numeros, indices, resultado, lock):
+    lista_primos = []
+
+    for numero, indice in zip(numeros, indices):  
+        if numero < 2:
+            continue
+
+        primo = True
+        for i in range(2, int(numero ** 0.5) + 1):
+            if numero % i == 0:
+                primo = False
+                break
+
+        if primo:
+            lista_primos.append((indice, numero)) 
+
+    with lock:
+        resultado.extend(lista_primos)  
+
+def multi_thread_10_v2():
+    qnt_threads = 8
+    tempo_inicial = time.time()
+
+    with open('Entrada01.txt', 'r') as arquivo:
+        numeros = [int(linha.strip()) for linha in arquivo]
+
+    
+    indices = list(range(len(numeros)))
+
+    qnt_por_thread = len(numeros) // qnt_threads
+
+     
+    partes_numeros = [numeros[i * qnt_por_thread: (i + 1) * qnt_por_thread] for i in range(qnt_threads)]
+    partes_indices = [indices[i * qnt_por_thread: (i + 1) * qnt_por_thread] for i in range(qnt_threads)]
+
+    
+    partes_numeros[-1].extend(numeros[qnt_threads * qnt_por_thread:])
+    partes_indices[-1].extend(indices[qnt_threads * qnt_por_thread:])
+
+    lista_primos_compartilhada = []
+    lock = threading.Lock()  
+    lista_threads = []
+
+    for i in range(qnt_threads):
+        thread = threading.Thread(target=listar_primos_10_v2, args=(partes_numeros[i], partes_indices[i], lista_primos_compartilhada, lock))
+        lista_threads.append(thread)
+        thread.start()
+
+    for thread in lista_threads:
+        thread.join()
+
+    
+    lista_primos_compartilhada.sort()  
+
+    with open('output/Saida_10_v2.txt', 'w') as saida:
+        for _, primo in lista_primos_compartilhada:  
+            saida.write(f"{primo}\n")
+
+    tempo_final = time.time()
+    duracao = tempo_final - tempo_inicial
+    print(f'Processo concluído com sucessso, usando 10 Threads e organizando a saída com índices, sua duração em segundos foi de:{round(duracao,2)}')
+
+multi_thread_10_v2()
 
 
