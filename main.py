@@ -1,7 +1,7 @@
 import threading
 import time
 
-def teste_solo_thread():
+def listar_primos():
     lista_primos = []
     with open('Entrada01.txt', 'r') as arquivo:
         for linha in arquivo:
@@ -20,13 +20,15 @@ def teste_solo_thread():
     with open ('output/Saida01.txt', 'w') as saida:
         for numero in lista_primos:
             str_num = str(numero)
-            saida.write(f"{str_num}\n")
-                
+            saida.write(f"{str_num}\n")       
 
-thread = threading.Thread(target=teste_solo_thread)
-thread.start()
-tempo_inicial = time.time()
-thread.join()
-tempo_final = time.time()
-duracao = tempo_final - tempo_inicial
-print(f'Arquivo lido com sucesso, sua duração em segundos foi de:{round(duracao,2)}')
+def solo_thread():
+    thread = threading.Thread(target=listar_primos)
+    thread.start()
+    tempo_inicial = time.time()
+    thread.join()
+    tempo_final = time.time()
+    duracao = tempo_final - tempo_inicial
+    print(f'Arquivo lido com sucesso, sua duração em segundos foi de:{round(duracao,2)}')
+
+solo_thread()
