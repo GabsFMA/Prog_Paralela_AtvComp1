@@ -20,7 +20,7 @@ def listar_primos():
 
             if numero<2:
                 continue
-
+            
             primo = True
             for i in range(2, int(numero**0.5) + 1): 
                 if numero % i == 0:
@@ -46,3 +46,27 @@ def solo_thread():
     print(f'Arquivo lido com sucesso, sua duração em segundos foi de:{round(duracao,2)}')
 
 solo_thread()
+
+#----------------------------------------------------------
+
+#Fazendo uso de cinco threads
+
+def separar_primos(numeros, resultado):
+    lista_primo = []
+
+    for numero in numeros:
+        if numero < 2:
+            continue
+            
+        Primo = True
+
+        for i in range(2, int(numero ** 0.5) + 1):
+            if numero % i == 0:
+                Primo = False
+                break
+            if Primo: 
+                lista_primo.append(numero)
+    resultado.extend(lista_primo)
+        
+
+        
