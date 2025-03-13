@@ -10,11 +10,9 @@ def teste_solo_thread():
             primo = True
             for i in range(2, int(numero**0.5) + 1): 
                 if numero % i == 0:
-                    #print(f'{numero}: Não é primo')
                     primo = False
                     break
             if primo:
-                #print(f'{numero}: É primo')
                 lista_primos.append(numero)
 
     print(f'Lista de primos: {lista_primos}')
