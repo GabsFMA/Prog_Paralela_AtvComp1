@@ -1,5 +1,5 @@
-#Aluno: Gabriel Francisco Monteiro Amaral
-#RA: 1T1.846767
+#Alunos: Gabriel Francisco Monteiro Amaral e Yago Bastos dos Santos
+#RA: 1T1.846767 e 
 #Matéria: Sistemas distribuídos e Programação Paralela
 
 
