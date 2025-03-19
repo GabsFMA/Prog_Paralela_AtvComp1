@@ -45,8 +45,6 @@ def solo_thread():
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 1 Thread sua duração em segundos foi de:{round(duracao,2)}')
 
-#solo_thread()
-
 #----------------------------------------------------------
 
 #Fazendo uso de cinco threads
@@ -104,8 +102,6 @@ def multi_thread_5_v1():
     tempo_final = time.time()
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 5 Threads sua duração em segundos foi de:{round(duracao,2)}')
-
-#multi_thread_5_v1()
 
 #----------------------------------------------------------
 
@@ -173,8 +169,6 @@ def multi_thread_5_v2():
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 5 Threads e organizando a saída com índices, sua duração em segundos foi de:{round(duracao,2)}')
 
-#multi_thread_5_v2()
-
 #----------------------------------------------------------
 
 #Fazendo uso de dez threads (Sem organização por índice)
@@ -232,9 +226,6 @@ def multi_thread_10_v1():
     tempo_final = time.time()
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 10 Threads sua duração em segundos foi de:{round(duracao,2)}')
-
-#multi_thread_10_v1()
-
 
 #----------------------------------------------------------
 
@@ -301,5 +292,24 @@ def multi_thread_10_v2():
     tempo_final = time.time()
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 10 Threads e organizando a saída com índices, sua duração em segundos foi de:{round(duracao,2)}')
+    
 
-#multi_thread_10_v2()
+def benchmark():
+    print("Iniciando benchmark...\n")
+
+    # Lista de funções a serem testadas
+    funcoes = [
+        ("1 Thread", solo_thread),
+        ("5 Threads (v1)", multi_thread_5_v1),
+        ("5 Threads (v2)", multi_thread_5_v2),
+        ("10 Threads (v1)", multi_thread_10_v1),
+        ("10 Threads (v2)", multi_thread_10_v2)
+    ]
+
+    # Executar cada função e medir o tempo
+    for nome, funcao in funcoes:
+        print(f"Executando: {nome}")
+        funcao()  # Executa a função
+
+if __name__ == "__main__":
+    benchmark()
