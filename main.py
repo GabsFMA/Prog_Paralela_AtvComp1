@@ -1,5 +1,5 @@
-#Alunos: Gabriel Francisco Monteiro Amaral e Yago Bastos dos Santos
-#RA: 1T1.846767 e 
+#Alunos: Gabriel Francisco Monteiro Amaral, Yago Bastos dos Santos e Julia Batista Iervese 
+#RA: 1T1.846767, 1T1.844186 e 1T1.833991
 #Matéria: Sistemas distribuídos e Programação Paralela
 
 
@@ -302,6 +302,4 @@ def multi_thread_10_v2():
     duracao = tempo_final - tempo_inicial
     print(f'Processo concluído com sucessso, usando 10 Threads e organizando a saída com índices, sua duração em segundos foi de:{round(duracao,2)}')
 
-multi_thread_10_v2()
-
-
+#multi_thread_10_v2()
